@@ -16,7 +16,7 @@ Proses pelatihan dikonfigurasi berjalan selama **20 epoch** dengan ukuran *batch
 | **Attention Implementation** | SDPA (`sdpa` - PyTorch Scaled Dot-Product Attention) |
 | **Device Map** | `balanced` |
 | **Max Sequence Length** | 2048 tokens |
-| **Dimensi Resolusi Citra** | $896 \times 896$ piksel (LANCZOS resampling) |
+| **Dimensi Resolusi Citra** | $896 \times 896$ piksel |
 
 ### 2. Konfigurasi Adaptive LoRA (AdaLoRA)
 | Parameter | Nilai | Keterangan |
@@ -27,10 +27,10 @@ Proses pelatihan dikonfigurasi berjalan selama **20 epoch** dengan ukuran *batch
 | `lora_dropout` | `0.10` | Probabilitas *dropout* pada layer adapter |
 | `target_modules` | `r".*language_model.*\.(q_proj\|k_proj\|v_proj\|o_proj\|gate_proj\|up_proj\|down_proj)"` | Lapisan *attention* dan *feed-forward* pada model bahasa |
 | `modules_to_save` | `["multi_modal_projector"]` | Modul jembatan multimodal dilatih secara penuh |
-| `tinit` | $\max(50, \lfloor \text{TOTAL\_STEP} \times 0.05 \rfloor)$ | Langkah awal aktivasi pemangkasan *rank* |
-| `tfinal` | $\max(200, \lfloor \text{TOTAL\_STEP} \times 0.70 \rfloor)$ | Langkah penghentian perubahan alokasi *rank* |
+| `tinit` | `max(50, int(TOTAL_STEP * 0.05))` | Langkah awal aktivasi pemangkasan *rank* |
+| `tfinal` | `max(200, int(TOTAL_STEP * 0.70))` | Langkah penghentian perubahan alokasi *rank* |
 | `deltaT` | `50` | Interval langkah kalkulasi pentingnya parameter (*importance update*) |
-| $\beta_1, \beta_2$ | `0.85`, `0.85` | Faktor pemulusan eksponensial (*EMA*) untuk matriks SVD |
+| `beta1`, `beta2` | `0.85`, `0.85` | Faktor pemulusan eksponensial (*EMA*) |
 
 ### 3. Hyperparameter Pelatihan (*Training Arguments*)
 | Parameter | Nilai | Keterangan |
