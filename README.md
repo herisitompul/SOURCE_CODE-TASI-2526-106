@@ -45,7 +45,7 @@ Proses pelatihan dikonfigurasi berjalan selama **20 epoch** dengan ukuran *batch
 | **Max Grad Norm** | `0.5` | Pemotongan gradien (*gradient clipping*) |
 | **Label Smoothing** | `0.05` | Regularisasi distribusi probabilitas label |
 | **Gradient Checkpointing**| `True` (`use_reentrant=False`) | Penghematan konsumsi VRAM GPU |
-| **SWA Start Ratio** | `0.70` (Epoch 14) | *Stochastic Weight Averaging* pada 30% epoch terakhir |
+| **SWA Start Ratio** | `0.70` |
 
 ---
 
